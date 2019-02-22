@@ -93,18 +93,24 @@ risk_input_percent = float(risk_input) / 100
 stock_drop = float(daily_prices["2. high"]) * (1-risk_input_percent)
 risk_span_top = float(daily_prices["2. high"])
 risk_span_bottom = stock_drop 
-print(f"Your risk span is: {risk_span_bottom} to {risk_span_top}")
-print(f"Latest price: {to_usd(float(latest_close_usd))}")
 
 
-if float(daily_prices["3. low"]) < float(stock_drop):
-        print ("RECOMMENDATION: Don't Buy!")
-        print ("RECOMMENDATION REASON: Because the latest closing price is not within threshold of your risk tolerance, don't buy.")
-        
-else:
-        print("RECOMMENDATION: Buy!")
-        print ("RECOMMENDATION REASON: Because the latest closing price is within threshold of your risk tolerance, buy.")
-        
+if risk_input != 0 < float(risk_input) <100:
+        if float(daily_prices["3. low"]) < float(stock_drop):
+                print(f"Your risk span is: {risk_span_bottom} to {risk_span_top}") #need to format
+                print(f"Latest price: {to_usd(float(latest_close_usd))}") 
+                print ("RECOMMENDATION: Don't Buy!")
+                print ("RECOMMENDATION REASON: Because the latest closing price is not within threshold of your risk tolerance, don't buy.")
+                
+        else:
+                print(f"Your risk span is: {risk_span_bottom} to {risk_span_top}") #need to format
+                print(f"Latest price: {to_usd(float(latest_close_usd))}") 
+                print("RECOMMENDATION: Buy!")
+                print ("RECOMMENDATION REASON: Because the latest closing price is within threshold of your risk tolerance, buy.")
+else: 
+        print ("Oh no! that's not a valid risk, the program will now close")  
+exit()    
+
 print("-----------------------------------------------------")
 print("WRITING DATA TO CSV: {csv_file_path}")
 print("-----------------------------------------------------")
