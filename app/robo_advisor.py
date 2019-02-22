@@ -1,3 +1,4 @@
+import csv 
 import json
 import requests
 import os 
@@ -16,8 +17,6 @@ print(request_url)
 
 response = requests.get(request_url)
 
-#print("Status:" +  str(response.status_code)) #from class
-#print("Response Text: " + response.text) #from class
 parsed_response = json.loads(response.text) #from class
 tsd = parsed_response["Time Series (Daily)"] #from screencast
 dates = list(tsd.keys())
@@ -40,9 +39,6 @@ for date in dates:
 
 recent_low = min(low_prices)
 
-
-parsed_response["Time Series (Daily)"]["2019-02-19"]["4. close"] #type it in the terminal to see it
-
 symbol = "NFLX" # TODO: capture user input, like... input("Please specify a stock symbol: ")
 
 print("-----------------")
@@ -54,8 +50,11 @@ print(f"LATEST DAILY CLOSING PRICE: {to_usd(float(latest_close_usd))}")
 print(f"RECENT HIGH: {to_usd(float(recent_high))}") 
 print(f"RECENT LOW: {to_usd(float(recent_low))}") 
 print("-----------------")
-print("RECOMMENDATION: Buy!")
-print("RECOMMENDATION REASON: Because the latest closing price is within threshold XYZ etc., etc. and this fits within your risk tolerance etc., etc.")
+print("RECOMMENDATION: Buy!") #todo this part
+print("RECOMMENDATION REASON: Because the latest closing price is within threshold XYZ etc., etc. and this fits within your risk tolerance etc., etc.") #todo this part
+print("-----------------")
+print("WRITING DATA TO CSV...")
+print("-----------------")
 print("-----------------")
 
 parsed_response["Meta Data"].keys()
@@ -63,3 +62,10 @@ parsed_response["Meta Data"].keys()
 #need to install pip install python-dotenv
 
 # TODO: write response data to a CSV file
+#stopped at 52.42
+
+csv_file_path = "data/prices.csv"
+
+with open(csv_file_path, "w") as csv_file:
+        writer = csv.DictWriter (csv_file, fieldnames = ["city", "name"])
+        writer.writerow({"city": "New York", "name": "Yankees"})
