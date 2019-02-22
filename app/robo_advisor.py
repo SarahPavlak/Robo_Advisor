@@ -14,16 +14,15 @@ print(request_url)
 
 response = requests.get(request_url)
 
-print("Status:" +  str(response.status_code)) #from class
-print("Response Text: " + response.text) #from class
+#print("Status:" +  str(response.status_code)) #from class
+#print("Response Text: " + response.text) #from class
 
 parsed_response = json.loads(response.text)
+last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
 
-breakpoint() #from class
+#breakpoint() #from class
 
-print("The Latest Closing Pirce IS: $XYZ.00")
-
-parsed_response["Time Series (Daily)"]["2019-02-19"]["4. close"]
+parsed_response["Time Series (Daily)"]["2019-02-19"]["4. close"] #type it in the terminal to see it
 
 symbol = "NFLX" # TODO: capture user input, like... input("Please specify a stock symbol: ")
 
@@ -31,10 +30,10 @@ symbol = "NFLX" # TODO: capture user input, like... input("Please specify a stoc
 # TODO: further revise the example outputs below to reflect real information
 print("-----------------")
 print(f"STOCK SYMBOL: {symbol}")
-print("RUN AT: 11:52pm on June 5th, 2018")
+print("RUN AT: 11:52pm on June 5th, 2018") #use date time module
 print("-----------------")
-print("LATEST DAY OF AVAILABLE DATA: June 4th, 2018")
-print(f"LATEST DAILY CLOSING PRICE: {latest_price_usd}")
+print(f"LATEST DAY OF AVAILABLE DATA: {last_refreshed}")
+#print(f"LATEST DAILY CLOSING PRICE: {latest_price_usd}")
 print("RECENT HIGH: $101,000.00")
 print("RECENT LOW: $99,000.00")
 print("-----------------")
@@ -42,6 +41,7 @@ print("RECOMMENDATION: Buy!")
 print("RECOMMENDATION REASON: Because the latest closing price is within threshold XYZ etc., etc. and this fits within your risk tolerance etc., etc.")
 print("-----------------")
 
+parsed_response["Meta Data"].keys()
 
 #need to install pip install python-dotenv
 
