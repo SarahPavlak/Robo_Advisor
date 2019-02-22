@@ -44,10 +44,41 @@ symbol = "NFLX" # TODO: capture user input, like... input("Please specify a stoc
 #csv_file_path = "data/prices.csv"
 
 csv_file_path = os.path.join (os.path.dirname(__file__), "data", "prices.csv")
+csv_header = ["timestamp", "open", "low", "high", "close", "volume"]
 
 with open(csv_file_path, "w") as csv_file:
-        writer = csv.DictWriter (csv_file, fieldnames = ["city", "name"])
-        writer.writerow({"city": "New York", "name": "Yankees"})
+        writer = csv.DictWriter (csv_file, fieldnames = csv_header)
+
+        #looping to write each row
+
+        writer.writerow({
+            "timestamp": "todo",  
+            "open": "todo",
+            "high": "todo", 
+            "low": "todo"
+        })
+
+         writer.writerow({
+            "timestamp": "todo",  
+            "open": "todo",
+            "high": "todo", 
+            "low": "todo"
+        })
+
+         writer.writerow({
+            "timestamp": "todo",  
+            "open": "todo",
+            "high": "todo", 
+            "low": "todo"
+        })
+
+         writer.writerow({
+            "timestamp": "todo",  
+            "open": "todo",
+            "high": "todo", 
+            "low": "todo"
+        })
+
 
 print("-----------------")
 print(f"STOCK SYMBOL: {symbol}")
@@ -68,5 +99,8 @@ print("-----------------")
 parsed_response["Meta Data"].keys()
 
 #need to install pip install python-dotenv
+
+
+
 
 
