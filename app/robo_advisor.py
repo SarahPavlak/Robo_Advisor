@@ -26,6 +26,7 @@ print("-----------------------------------------------------")
 
 response = requests.get(request_url)
 
+
 parsed_response = json.loads(response.text) #from class
 tsd = parsed_response["Time Series (Daily)"] #from screencast
 dates = list(tsd.keys()) #from screencast
@@ -78,21 +79,32 @@ print(f"LATEST DAILY CLOSING PRICE: {to_usd(float(latest_close_usd))}")
 print(f"RECENT HIGH: {to_usd(float(recent_high))}") 
 print(f"RECENT LOW: {to_usd(float(recent_low))}") 
 print("-----------------------------------------------------")
+
 #calculating risk
+
 risk_range = float(daily_prices["2. high"]) - float(daily_prices["3. low"])
-print("Please specify the amount of risk you are willing to accept")
-print ("by inputting a number (0-100) that represents a decrease from the stock high")
-print("For example, 10 means that you are ok with the stock losing 10 percent")
-print("of its value from the high")
+print("-----------------------------------------------------")
+print("Risk Explanation:")
+print("Please specify the amount of risk you are willing to accept by inputting a number (0-100) that represents a decrease from the stock high.For example, 10 means that you are ok with the stock losing 10 percent of its value from the high.")
+print("-----------------------------------------------------")
+
 risk_input = input("Risk:")
 risk_input_percent = float(risk_input) / 100
 stock_drop = float(daily_prices["2. high"]) * (1-risk_input_percent)
-#print(stock_drop)
+risk_span_top = float(daily_prices["2. high"])
+risk_span_bottom = stock_drop 
+print(f"Your risk span is: {risk_span_bottom} to {risk_span_top}")
+print(f"Latest price: {to_usd(float(latest_close_usd))}")
+
+
 if float(daily_prices["3. low"]) < float(stock_drop):
-        print ("RECOMMENDATION: Buy!")
+        print ("RECOMMENDATION: Don't Buy!")
+        print ("RECOMMENDATION REASON: Because the latest closing price is not within threshold of your risk tolerance, don't buy.")
+        
 else:
-        print("RECOMMENDATION: Don't Buy!")
-print("RECOMMENDATION REASON: Because the latest closing price is within threshold XYZ etc., etc. and this fits within your risk tolerance etc., etc.") #todo this part
+        print("RECOMMENDATION: Buy!")
+        print ("RECOMMENDATION REASON: Because the latest closing price is within threshold of your risk tolerance, buy.")
+        
 print("-----------------------------------------------------")
 print("WRITING DATA TO CSV: {csv_file_path}")
 print("-----------------------------------------------------")
@@ -106,9 +118,4 @@ parsed_response["Meta Data"].keys()
 #If preliminary validations are not satisfied, the system should display a friendly error message like "Oh, expecting a properly-formed stock symbol like 'MSFT'. Please try again." and stop execution.
 #When the system makes an HTTP request for that stock symbol's trading data, if the stock symbol is not found or if there is an error message returned by the API server, the system should display a friendly error message like "Sorry, couldn't find any trading data for that stock symbol", and it should stop program execution, optionally prompting the user to try again.
 #If the system processes only a single stock symbol at a time, the system may use a single CSV file named "data/prices.csv", or it may use multiple CSV files, each with a name corresponding to the given stock symbol (e.g. "data/prices_msft.csv, "prices_aapl.csv", etc.). If the system processes multiple stock symbols at a time, it should use multiple files, each with a name corresponding to the given stock symbol (e.g. "data/prices_msft.csv", "prices_aapl.csv", etc.). If using more than one CSV file, the program should have a way of cleaning-up to prevent uncontrolled proliferation of new files.
-
-
-
-
-
 
