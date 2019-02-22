@@ -18,19 +18,25 @@ response = requests.get(request_url)
 
 #print("Status:" +  str(response.status_code)) #from class
 #print("Response Text: " + response.text) #from class
-parsed_response = json.loads(response.text)
-tsd = parsed_response["Time Series (Daily)"]
+parsed_response = json.loads(response.text) #from class
+tsd = parsed_response["Time Series (Daily)"] #from screencast
 dates = list(tsd.keys())
 latest_day = dates[0]
 last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"] 
-latest_close_usd = tsd[latest_day]["4. close"]
+latest_close_usd = tsd[latest_day]["4. close"] #from screencast
 
-#breakpoint() #from class
+
+high_prices = [] 
+for date in dates:
+    high_price = tsd[date]["2. high"]
+    high_prices.append (float(high_price))
+
+recent_high = max(high_prices)
+
 
 parsed_response["Time Series (Daily)"]["2019-02-19"]["4. close"] #type it in the terminal to see it
 
 symbol = "NFLX" # TODO: capture user input, like... input("Please specify a stock symbol: ")
-
 
 print("-----------------")
 print(f"STOCK SYMBOL: {symbol}")
@@ -38,7 +44,7 @@ print("RUN AT: 11:52pm on June 5th, 2018") #use date time module
 print("-----------------")
 print(f"LATEST DAY OF AVAILABLE DATA: {last_refreshed}")
 print(f"LATEST DAILY CLOSING PRICE: {to_usd(float(latest_close_usd))}")
-print("RECENT HIGH: $101,000.00")
+print(f"RECENT HIGH: {to_usd(float(recent_high))}") 
 print("RECENT LOW: $99,000.00")
 print("-----------------")
 print("RECOMMENDATION: Buy!")
