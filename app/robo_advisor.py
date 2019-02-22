@@ -41,6 +41,14 @@ recent_low = min(low_prices)
 
 symbol = "NFLX" # TODO: capture user input, like... input("Please specify a stock symbol: ")
 
+#csv_file_path = "data/prices.csv"
+
+csv_file_path = os.path.join (os.path.dirname(__file__), "data", "prices.csv")
+
+with open(csv_file_path, "w") as csv_file:
+        writer = csv.DictWriter (csv_file, fieldnames = ["city", "name"])
+        writer.writerow({"city": "New York", "name": "Yankees"})
+
 print("-----------------")
 print(f"STOCK SYMBOL: {symbol}")
 print("RUN AT: 11:52pm on June 5th, 2018") #use date time module
@@ -53,7 +61,7 @@ print("-----------------")
 print("RECOMMENDATION: Buy!") #todo this part
 print("RECOMMENDATION REASON: Because the latest closing price is within threshold XYZ etc., etc. and this fits within your risk tolerance etc., etc.") #todo this part
 print("-----------------")
-print("WRITING DATA TO CSV...")
+print("WRITING DATA TO CSV: {csv_file_path}")
 print("-----------------")
 print("-----------------")
 
@@ -61,11 +69,4 @@ parsed_response["Meta Data"].keys()
 
 #need to install pip install python-dotenv
 
-# TODO: write response data to a CSV file
-#stopped at 52.42
 
-csv_file_path = "data/prices.csv"
-
-with open(csv_file_path, "w") as csv_file:
-        writer = csv.DictWriter (csv_file, fieldnames = ["city", "name"])
-        writer.writerow({"city": "New York", "name": "Yankees"})
