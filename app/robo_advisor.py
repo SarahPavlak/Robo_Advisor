@@ -5,6 +5,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+def to_usd(my_price):
+        return "${0:,.2f}".format(my_price) #taken from screencast
+
 API_KEY = os.environ.get('MY_API_KEY')
 print(API_KEY)
 
@@ -19,6 +22,7 @@ response = requests.get(request_url)
 
 parsed_response = json.loads(response.text)
 last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
+latest_close_usd = parsed_response["Time Series (Daily)"]["2019-02-20"]["4. close"]
 
 #breakpoint() #from class
 
@@ -33,7 +37,7 @@ print(f"STOCK SYMBOL: {symbol}")
 print("RUN AT: 11:52pm on June 5th, 2018") #use date time module
 print("-----------------")
 print(f"LATEST DAY OF AVAILABLE DATA: {last_refreshed}")
-#print(f"LATEST DAILY CLOSING PRICE: {latest_price_usd}")
+print(f"LATEST DAILY CLOSING PRICE: {to_usd(float(latest_close_usd))}")
 print("RECENT HIGH: $101,000.00")
 print("RECENT LOW: $99,000.00")
 print("-----------------")
@@ -51,10 +55,6 @@ parsed_response["Meta Data"].keys()
 # TODO: use the "requests" package to issue a "GET" request to the specified url, and store the JSON response in a variable...
 
 # TODO: traverse the nested response data structure to find the latest closing price and other values of interest...
-latest_price_usd = "$100,000.00"
 
-#
-# INFO OUTPUTS
-#
 
 # TODO: write response data to a CSV file
