@@ -3,6 +3,7 @@ import json
 import requests
 import os 
 from dotenv import load_dotenv
+import datetime
 
 load_dotenv()
 
@@ -70,7 +71,7 @@ with open(csv_file_path, "w") as csv_file:
 
 print("-----------------------------------------------------")
 print(f"STOCK SYMBOL: {symbol}")
-print("RUN AT: 11:52pm on June 5th, 2018") #use date time module
+print("RUN AT: " + datetime.datetime.now().strftime("%Y-%m-%d %H:%m:%S")) #use date time module
 print("-----------------------------------------------------")
 print(f"LATEST DAY OF AVAILABLE DATA: {last_refreshed}")
 print(f"LATEST DAILY CLOSING PRICE: {to_usd(float(latest_close_usd))}")
@@ -90,7 +91,6 @@ risk_input = input("Risk input:")
 risk_input_percent = float(risk_input) / 100
 stock_drop = float(daily_prices["2. high"]) * (1-risk_input_percent)
 risk_span_top = to_usd(float(daily_prices["2. high"]))
-#risk_span_bottom = stock_drop 
 risk_span_bottom = to_usd(float(stock_drop))
 
 
@@ -123,6 +123,8 @@ parsed_response["Meta Data"].keys()
 #Before requesting data from the Internet, the system should first perform preliminary validations on user inputs. For example, it should ensure stock symbols are a reasonable amount of characters in length and not numeric in nature.
 #If preliminary validations are not satisfied, the system should display a friendly error message like "Oh, expecting a properly-formed stock symbol like 'MSFT'. Please try again." and stop execution.
 #When the system makes an HTTP request for that stock symbol's trading data, if the stock symbol is not found or if there is an error message returned by the API server, the system should display a friendly error message like "Sorry, couldn't find any trading data for that stock symbol", and it should stop program execution, optionally prompting the user to try again.
+
+
 
 
 
