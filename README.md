@@ -23,3 +23,4 @@ Running the program:
     2. cd *name of your folder*, 
     3. conda activate *name of created environment*
     4. "python *name of your document*" for example, python robo.py
+2. Type the name of the stock you would like to analyze, as well as your preferred risk level. Wait for results to generate.
