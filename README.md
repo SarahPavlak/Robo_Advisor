@@ -16,6 +16,7 @@ Security Setup:
 1. Navigate to https://www.alphavantage.co/ and request an API Key
 2. Create a .env file in your virtual code studio or other desired platform. Within the .env file, type "ALPHAVANTAGE_API_KEY='YOUR API KEY GOES HERE'
     This will create an environment variable for you which will ensure that your key remains secure. 
+3. Create a ".gitignore" file and, within the file, type ".env"
 
 Running the program:
 1. On your terminal type:
