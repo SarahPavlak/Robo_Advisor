@@ -14,9 +14,22 @@ API_KEY = os.environ.get('MY_API_KEY')
 
 
 #Collecting User Information
-user_input = input("Please print a stock symbol: ")
-symbol = user_input 
+#Validating inputs
 
+
+while True:
+        user_input = input ("Please print a stock symbol: ")
+        if user_input.isalpha() and len(user_input) < 6 : 
+                print(user_input)
+        else: 
+                print("Oh, expecting a properly-formed stock symbol like 'MSFT' with no more than six symbols. Please try again. The program will now exit!")
+                exit()
+        break
+
+        #source: https://stackoverflow.com/questions/36432954/python-validation-to-ensure-input-only-contains-characters-a-z
+        #source: https://stackoverflow.com/questions/8761778/limiting-python-input-strings-to-certain-characters-and-lengths 
+
+symbol = user_input 
 
 #Obtaining the desired stock information
 print("-----------------------------------------------------")
@@ -123,6 +136,8 @@ parsed_response["Meta Data"].keys()
 #Before requesting data from the Internet, the system should first perform preliminary validations on user inputs. For example, it should ensure stock symbols are a reasonable amount of characters in length and not numeric in nature.
 #If preliminary validations are not satisfied, the system should display a friendly error message like "Oh, expecting a properly-formed stock symbol like 'MSFT'. Please try again." and stop execution.
 #When the system makes an HTTP request for that stock symbol's trading data, if the stock symbol is not found or if there is an error message returned by the API server, the system should display a friendly error message like "Sorry, couldn't find any trading data for that stock symbol", and it should stop program execution, optionally prompting the user to try again.
+
+
 
 
 
