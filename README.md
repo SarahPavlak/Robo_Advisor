@@ -18,4 +18,8 @@ Security Setup:
     This will create an environment variable for you which will ensure that your key remains secure. 
 
 Running the program:
-1. navigate to cd desktop, cd *name of your folder*, conda activate *name of created environment* and then type "python *name of your document*" for example, python robo.py
+1. On your terminal type:
+    1. cd desktop, 
+    2. cd *name of your folder*, 
+    3. conda activate *name of created environment*
+    4. "python *name of your document*" for example, python robo.py
