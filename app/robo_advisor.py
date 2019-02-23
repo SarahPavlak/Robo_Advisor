@@ -26,7 +26,6 @@ print("-----------------------------------------------------")
 
 response = requests.get(request_url)
 
-
 parsed_response = json.loads(response.text) #from class
 tsd = parsed_response["Time Series (Daily)"] #from screencast
 dates = list(tsd.keys()) #from screencast
@@ -84,7 +83,7 @@ print("-----------------------------------------------------")
 risk_range = float(daily_prices["2. high"]) - float(daily_prices["3. low"])
 print("-----------------------------------------------------")
 print("Risk Explanation:")
-print("Please specify the amount of risk you are willing to accept by inputting a number (0-100) that represents a decrease from the stock high.For example, 10 means that you are ok with the stock losing 10 percent of its value from the high.")
+print("Please specify the amount of risk you are willing to accept by inputting a number (0-100) that represents a decrease from the stock high. For example, 10 means that you are ok with the stock losing 10 percent of its value from the high.")
 print("-----------------------------------------------------")
 
 risk_input = input("Risk input:")
@@ -119,9 +118,7 @@ print("-----------------------------------------------------")
 
 parsed_response["Meta Data"].keys()
 
-#todo:
-# read me file
-#The system should prompt the user to input one or more stock symbols (e.g. "MSFT", "AAPL", etc.). It may optionally allow the user to specify multiple symbols, either one-by-one or all at the same time (e.g. "MSFT, AAPL, GOOG, AMZN"). It may also optionally prompt the user to specify additional inputs such as risk tolerance and/or other trading preferences, as desired and applicable.
+
 #Before requesting data from the Internet, the system should first perform preliminary validations on user inputs. For example, it should ensure stock symbols are a reasonable amount of characters in length and not numeric in nature.
 #If preliminary validations are not satisfied, the system should display a friendly error message like "Oh, expecting a properly-formed stock symbol like 'MSFT'. Please try again." and stop execution.
 #When the system makes an HTTP request for that stock symbol's trading data, if the stock symbol is not found or if there is an error message returned by the API server, the system should display a friendly error message like "Sorry, couldn't find any trading data for that stock symbol", and it should stop program execution, optionally prompting the user to try again.
